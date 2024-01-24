@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./Button";
 
 function App() {
   const [message, setMessage] = useState(
@@ -9,12 +10,9 @@ function App() {
     <div>
       <h1>Hello world!</h1>
       <p>{message}</p>
-      <button
-        onClick={() => setMessage("New message!")}
-        style={{ backgroundColor: "red", color: "white", padding: 10 }}
-      >
+      <Button onClick={() => setMessage("New message!")} disabled={false}>
         Change message
-      </button>
+      </Button>
     </div>
   );
 }

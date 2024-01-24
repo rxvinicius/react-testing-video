@@ -10,7 +10,11 @@ const Button = ({
   onClick: (number: number) => void;
 }) => (
   <button
-    style={{ backgroundColor: disabled ? "red" : "blue" }}
+    style={{
+      backgroundColor: disabled ? "red" : "blue",
+      color: "white",
+      padding: 10,
+    }}
     onClick={() => onClick(10)}
   >
     {children}
