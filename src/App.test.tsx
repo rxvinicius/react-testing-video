@@ -1,9 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 
-const sum = (x: number, y: number) => {
-  return x + y;
-};
+const sum = (x: number, y: number) => x + y;
 
 describe("App Component", () => {
   it("should sum correctly", () => {
@@ -17,19 +15,20 @@ describe("App Component", () => {
 
   it("should change message on button click", () => {
     render(<App />);
-    screen.getByText("Let's learn more about testing in React");
+    // getByText -> gives an error if don't find the text
+    // queryByText -> dosen't gives an error if don't find the text
+    const { getByText, queryByText } = screen;
 
-    const button = screen.getByText(/change message/i);
+    const initialMessage = "Let's learn more about testing in React";
+    getByText(initialMessage);
+
+    const button = getByText(/change message/i);
     fireEvent.click(button);
-    screen.getByText(/new message!/i);
-
-    const oldMessage = screen.queryByText(
-      "Let's learn more about testing in React"
-    );
+    getByText(/new message!/i);
 
     // two ways to verify is the oldMessage is in the page or not
-    expect(oldMessage).toBeNull(); // first one (my favorite)
-    // expect(oldMessage).not.toBeInTheDocument(); // second onde
+    expect(queryByText(initialMessage)).toBeNull(); // first one (my favorite)
+    // expect(queryByText(initialMessage)).not.toBeInTheDocument(); // second onde
   });
 });
 
